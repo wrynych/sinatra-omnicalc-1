@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Target: Omnicalc-1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+  <body>
+    <h1>Payment Calculator</h1>
+    <form action="/payment/new" method="post">
+      <label for="apr">APR:</label>
+      <input type="text" id="apr" name="apr" placeholder="Enter APR"><br><br>
+      
+      <label for="years">Number of years:</label>
+      <input type="text" id="years" name="years" placeholder="Enter number of years"><br><br>
+      
+      <label for="principal">Principal:</label>
+      <input type="text" id="principal" name="principal" placeholder="Enter principal"><br><br>
+
+      <button type="submit">Calculate monthly payment</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Results</title>
+  </head>
+  <body>
+    <h1>Payment Results</h1>
+    <p>Monthly Payment: $<%= '%.2f' % @monthly_payment %></p>
+    <p>Interest Rate: <%= '%.4f' % @apr %> (as percentage: <%= '%.2f' % (@apr * 100) %>)</p>
+    <a href="/payment/new">Calculate another monthly payment</a>
+  </body>
+</html>
