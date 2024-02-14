@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Payment Results</title>
-  </head>
-  <body>
-    <h1>Payment Results</h1>
-    <p>Monthly Payment: $<%= '%.2f' % @monthly_payment %></p>
-    <p>Interest Rate: <%= '%.4f' % @apr %> (as percentage: <%= '%.2f' % (@apr * 100) %>)</p>
-    <a href="/payment/new">Calculate another monthly payment</a>
-  </body>
+<head>
+  <title>Payment Results</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>Payment Results</h1>
+  
+  <p>Monthly Payment: <%= @monthly_payment %></p>
+  <p>Annual Percentage Rate (APR): <%= @apr_percentage %></p>
+  
+  <a href="/payment/new">Calculate another payment</a>
+</body>
 </html>
