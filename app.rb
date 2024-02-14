@@ -49,10 +49,11 @@ post '/payment/new' do
   total_payments = years * 12
   monthly_payment = principal * (monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -total_payments))
 
-  @monthly_payment = '%.2f' % monthly_payment
+  @monthly_payment = sprintf("$%.2f", monthly_payment).gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,")
 
   erb :payment_results
 end
+
 
 # Random Number Generator
 get '/random/new' do
