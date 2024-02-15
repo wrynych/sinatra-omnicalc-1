@@ -48,7 +48,7 @@ post '/payment/results' do
   monthly_interest_rate = apr / 100 / 12
   total_payments = years * 12
   monthly_payment = principal * (monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -total_payments))
-
+  @monthly_payment = format("%.2f", monthly_payment)
   redirect "/payment/results?user_apr=#{apr}&user_years=#{years}&user_pv=#{principal}&monthly_payment=#{monthly_payment}"
 end
 
@@ -57,15 +57,6 @@ get '/payment/results' do
   @years = params['user_years'].to_i
   @principal = params['user_pv'].to_f
   @monthly_payment = params['monthly_payment'].to_f
-
-  erb :payment_results
-end
-
-get '/payment/results' do
-  @apr = params['user_apr'].to_f
-  @years = params['user_years'].to_i
-  @principal = params['user_pv'].to_f
-  @monthly_payment = params['monthly_payment'] # No need to convert to float here, as it's already formatted as currency
 
   erb :payment_results
 end
