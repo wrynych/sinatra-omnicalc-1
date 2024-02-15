@@ -62,15 +62,22 @@ get '/random/new' do
   erb :random_form
 end
 
-post '/random/new' do
+post '/random/generate' do
   min = params['min'].to_i
   max = params['max'].to_i
-  redirect "/random/results?min=#{min}&max=#{max}"
+  random_number = rand(min..max)
+  redirect "/random/results?min=#{min}&max=#{max}&random_number=#{random_number}"
 end
 
 get '/random/results' do
   @min = params['min'].to_i
   @max = params['max'].to_i
-  @random_number = rand(@min..@max)
+  @random_number = params['random_number'].to_i
+
+  # Ensure the random number falls within the specified range
+  while @random_number < @min || @random_number > @max
+    @random_number = rand(@min..@max)
+  end
+
   erb :random_results
 end
