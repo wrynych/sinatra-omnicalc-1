@@ -48,7 +48,7 @@ post '/payment/results' do
   monthly_interest_rate = apr / 100 / 12
   total_payments = years * 12
   monthly_payment = principal * (monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -total_payments))
-  @monthly_payment = format("%.2f", monthly_payment)
+  
   redirect "/payment/results?user_apr=#{apr}&user_years=#{years}&user_pv=#{principal}&monthly_payment=#{monthly_payment}"
 end
 
