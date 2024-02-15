@@ -40,20 +40,36 @@ get '/payment/new' do
   erb :payment_form
 end
 
-post '/payment/new' do
-  principal = params['principal'].to_f
-  apr = params['apr'].to_f
-  years = params['years'].to_i
+post '/payment/results' do
+  apr = params['user_apr'].to_f
+  years = params['user_years'].to_i
+  principal = params['user_pv'].to_f
 
   monthly_interest_rate = apr / 100 / 12
   total_payments = years * 12
   monthly_payment = principal * (monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -total_payments))
 
-  @monthly_payment = sprintf("$%.2f", monthly_payment).gsub(/(\d)(?=(\d{3})+(?!\d))/, "\\1,")
-  @apr_percentage = sprintf("%.4f%%", apr)
+  redirect "/payment/results?user_apr=#{apr}&user_years=#{years}&user_pv=#{principal}&monthly_payment=#{monthly_payment}"
+end
+
+get '/payment/results' do
+  @apr = params['user_apr'].to_f
+  @years = params['user_years'].to_i
+  @principal = params['user_pv'].to_f
+  @monthly_payment = params['monthly_payment'].to_f
 
   erb :payment_results
 end
+
+get '/payment/results' do
+  @apr = params['user_apr'].to_f
+  @years = params['user_years'].to_i
+  @principal = params['user_pv'].to_f
+  @monthly_payment = params['monthly_payment'] # No need to convert to float here, as it's already formatted as currency
+
+  erb :payment_results
+end
+
 
 
 
@@ -62,22 +78,16 @@ get '/random/new' do
   erb :random_form
 end
 
-post '/random/generate' do
-  min = params['min'].to_i
-  max = params['max'].to_i
+post '/random/results' do
+  min = params['user_min'].to_f
+  max = params['user_max'].to_f
   random_number = rand(min..max)
-  redirect "/random/results?min=#{min}&max=#{max}&random_number=#{random_number}"
+  redirect "/random/results?user_min=#{min}&user_max=#{max}&random_number=#{random_number}"
 end
 
 get '/random/results' do
-  @min = params['min'].to_i
-  @max = params['max'].to_i
-  @random_number = params['random_number'].to_i
-
-  # Ensure the random number falls within the specified range
-  while @random_number < @min || @random_number > @max
-    @random_number = rand(@min..@max)
-  end
-
+  @min = params['user_min'].to_f
+  @max = params['user_max'].to_f
+  @random_number = params['random_number'].to_f
   erb :random_results
 end

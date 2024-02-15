@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Target: Omnicalc-1</title>
+    <title>Random with Form</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
   </head>
-
   <body>
-    <h1>Random Number Generator</h1>
     <form action="/random/results" method="post">
-      <label for="min_input">Minimum:</label>
-      <input type="text" id="min_input" name="user_min" placeholder="E.g. 1.5"><br><br>
-      
-      <label for="max_input">Maximum:</label>
-      <input type="text" id="max_input" name="user_max" placeholder="E.g. 4.5"><br><br>
-
+      <div>
+        <label for="min_input">Minimum:</label>
+        <input id="min_input" type="text" name="user_min" placeholder="E.g. 1.5">
+      </div>
+      <div>
+        <label for="max_input">Maximum:</label>
+        <input id="max_input" type="text" name="user_max" placeholder="E.g. 4.5">
+      </div>
       <button type="submit">Pick random number</button>
     </form>
   </body>
 </html>
+
